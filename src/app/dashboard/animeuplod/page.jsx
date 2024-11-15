@@ -1,19 +1,8 @@
-"use client"
-import Navbar from "@/components/Navbar";
-import { useState } from 'react';
+"use client";
 
+import { useState } from "react";
 
-export default function Home() {
-  return (
-    <>
-    <Navbar />
-    <VideoUploadForm/>
-    </>
-  );
-}
-
-
-export function VideoUploadForm() {
+export default function VideoUploadForm() {
   const [videoFile, setVideoFile] = useState(null);
   const [thumbnailFile, setThumbnailFile] = useState(null);
   const [title, setTitle] = useState('');
@@ -30,11 +19,9 @@ export function VideoUploadForm() {
   const handleUpload = async () => {
     if (!videoFile || !title) return;
 
-    // Convert video and thumbnail files to base64
     const videoData = await fileToBase64(videoFile);
     const thumbnailData = thumbnailFile ? await fileToBase64(thumbnailFile) : null;
 
-    // Send video and thumbnail data to API route
     const response = await fetch('/api/uploadVideo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -43,8 +30,7 @@ export function VideoUploadForm() {
 
     const data = await response.json();
     if (response.ok) {
-      alert("video uploaded successfully")
-      // console.log('Video uploaded:', data);
+      alert("Video uploaded successfully");
     } else {
       console.error('Upload error:', data.error);
     }
@@ -60,24 +46,45 @@ export function VideoUploadForm() {
   };
 
   return (
-    <div>
+    <div className="max-w-md mx-auto p-6 bg-gray-800 rounded-lg shadow-md mt-2">
+      <h2 className="text-2xl font-semibold text-white mb-6">Upload Video</h2>
+      
       <input
         type="text"
         placeholder="Enter video title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="text-black"
+        className="w-full p-2 mb-4 text-black rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
       />
-      <input type="file" accept="video/*" onChange={handleFileChange} />
-      <input type="file" accept="image/*" onChange={handleThumbnailChange} />
+      
+      <input
+        type="file"
+        accept="video/*"
+        onChange={handleFileChange}
+        className="w-full p-2 mb-4 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+      />
+      
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleThumbnailChange}
+        className="w-full p-2 mb-4 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+      />
+      <p>Preview Duration time in sec</p>
       <input
         type="number"
         placeholder="Preview duration (seconds)"
         value={previewDuration}
         onChange={(e) => setPreviewDuration(Number(e.target.value))}
-        className="text-black"
+        className="w-full p-2 mb-4 text-black rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
       />
-      <button onClick={handleUpload}>Upload Video</button>
+      
+      <button
+        onClick={handleUpload}
+        className="w-full py-2 bg-teal-600 text-white font-semibold rounded hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+      >
+        Upload Video
+      </button>
     </div>
   );
 }
