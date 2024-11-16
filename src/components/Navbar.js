@@ -14,10 +14,12 @@ const Navbar = () => {
         <nav>
             <div>
                 <div className="logo">
+                    <Link href="/">
                     <img
                         src="https://res.cloudinary.com/dafjjvcsh/image/upload/v1731002711/Image/btierp6prpxswtb3qaq9.png"
                         alt="logo"
                     />
+                    </Link>
                 </div>
             </div>
             <div className="menu-toggle" onClick={toggleMenu}>

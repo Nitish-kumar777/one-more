@@ -174,12 +174,11 @@ export default function AboutUs() {
           <h1>About Us</h1>
           <p>
             Welcome to HaremTv | hentai.42web.io - your go-to platform for the
-            latest anime content. We're dedicated to bringing you the best in
+            latest anime content. We dedicated to bringing you the best in
             harem and anime content, curated carefully for our community.
           </p>
           <p>
-            Our journey started with a vision to make anime easily accessible,
-            and we’re thrilled to see our community grow every day.
+          Our journey started with a vision to make anime easily accessible, and we thrilled to see our community grow every day.
           </p>
           <div className="team-section">
             {[

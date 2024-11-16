@@ -28,12 +28,12 @@ function VideoGallery() {
       {videos.map((video) => (
         <div
           key={video.public_id}
-          className="thumbnail"
+          className="post-card"
           onMouseEnter={() => setHoveredVideo(video.previewUrl)}
           onMouseLeave={() => setHoveredVideo(null)}
           onClick={() => handleThumbnailClick(video)}
         >
-          <img src={video.thumbnailUrl || 'default-thumbnail.jpg'} alt={video.title} />
+          <img className='post-card' src={video.thumbnailUrl || 'default-thumbnail.jpg'} alt={video.title} />
           {hoveredVideo === video.previewUrl && (
             <video
               src={hoveredVideo}
@@ -44,7 +44,7 @@ function VideoGallery() {
               width="200"
             />
           )}
-          <h3>{video.title}</h3>
+          <h3 className='title'>{video.title}</h3>
         </div>
       ))}
     </div>

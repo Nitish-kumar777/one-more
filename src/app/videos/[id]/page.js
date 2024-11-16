@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import VideoGallery from '@/app/play/page';
 
 function VideoDetailPage() {
   const { id } = useParams();
@@ -23,17 +26,21 @@ function VideoDetailPage() {
   }, [id]);
 
   return (
+    <>
+    <Navbar/>
     <div>
       {video ? (
         <div key={video.id}>
           <h1>{video.title}</h1>
-          <video src={video.url} controls width="800" />
-          <p>{video.description || "No description available"}</p>
+          <video src={video.url} controls width="800" height={300} />
         </div>
       ) : (
-        <p>Loading video...</p>
+        <p className='flex justify-center items-center text-center p-60 text-[35px]'>Loading video...</p>
       )}
     </div>
+    <VideoGallery />
+    <Footer/>
+    </>
   );
 }
 
