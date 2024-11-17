@@ -121,7 +121,7 @@ const ContactUs = () => {
             <p>
               As part of the evolving web privacy standards, we no longer rely on third-party cookies
               to track your activity across different websites. This ensures better privacy and data
-              security for all users. If you have any questions about this, please don't hesitate to
+              security for all users. If you have any questions about this, please dont hesitate to
               contact us.
             </p>
           </div>
