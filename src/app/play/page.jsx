@@ -24,9 +24,8 @@ function VideoGallery() {
         } else {
           throw new Error("Unexpected data format");
         }
-      } catch (error) {
-        console.error(error);
-        setError(error.message);
+      } catch (err) {
+        setError(err.message);
       } finally {
         setIsLoading(false);
       }
@@ -40,7 +39,7 @@ function VideoGallery() {
   };
 
   return (
-    <div className="gallery">
+    <div className="all-videos">
       {isLoading ? (
         <p>Loading videos...</p>
       ) : error ? (
@@ -49,27 +48,30 @@ function VideoGallery() {
         videos.map((video) => (
           <div
             key={video.public_id}
-            className="post-card"
             onMouseEnter={() => setHoveredVideo(video.previewUrl)}
             onMouseLeave={() => setHoveredVideo(null)}
             onClick={() => handleThumbnailClick(video)}
+            className="w-full "
           >
-            <img
-              className="post-card"
-              src={video.thumbnailUrl || "default-thumbnail.jpg"}
-              alt={video.title || "Video thumbnail"}
-            />
-            {hoveredVideo === video.previewUrl && (
+            {hoveredVideo === video.previewUrl ? (
               <video
                 src={hoveredVideo}
                 autoPlay
                 loop
                 muted
-                className="preview"
-                width="200"
+                width="150"
+                height="150"
+              />
+            ) : (
+              <img
+                src={video.thumbnailUrl || "/default-thumbnail.jpg"}
+                alt={video.title || "Video thumbnail"}
+                width="240"
+                height="150"
+                style={{ objectFit: "cover" }}
               />
             )}
-            <h3 className="title">{video.title || "Untitled Video"}</h3>
+            <p>{video.title || "Untitled Video"}</p>
           </div>
         ))
       ) : (

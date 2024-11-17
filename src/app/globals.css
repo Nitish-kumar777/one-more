@@ -31,7 +31,7 @@ nav {
 }
 
 .all-videos a,
-.post-card .title,
+ .title,
 .social-icons a,
 nav ul li a {
     text-decoration: none
@@ -43,6 +43,7 @@ nav ul li a {
     width: 200px;
     height: 150px;
     cursor: pointer;
+    display: flex;
 }
 
 footer,
@@ -287,19 +288,14 @@ footer img {
     }
 }
 
-.all-videos,
-.post-card {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-}
-
 .all-videos {
-    padding: .5rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0.5rem;
     justify-content: start;
-    gap: .9%;
-    flex-wrap: wrap
-}
+    gap: 10px; /* Adds space between items */
+  }
 
 .post-card {
     max-width: 325px;
@@ -325,6 +321,7 @@ footer img {
 
 .post-card:hover {
     transform: scale(1.05);
+    z-index: -1;
     box-shadow: 0 8px 16px rgba(0, 0, 0, .3)
 }
 
@@ -356,12 +353,6 @@ footer img {
     font-weight: 500
 }
 
-.all-videos a {
-    display: block;
-    width: 49%;
-    max-width: 315px;
-    margin-bottom: 7px
-}
 
 .post-card .title {
     overflow: hidden;
