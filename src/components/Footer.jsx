@@ -5,7 +5,7 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'
 const Footer = () => {
   return (
     <footer className='footer'>
-      <img src="https://res.cloudinary.com/dafjjvcsh/image/upload/v1731168513/Image/aykm3anyueix48pkyaoq.gif" alt="" />
+      <img src="/ttt.jpg" alt="" />
       <div className='footer-content'>
       <h2>Stay Connected</h2>
       <p>Follow us on social media to stay updated with the latest trends and news!</p>
