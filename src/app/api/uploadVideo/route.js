@@ -7,38 +7,32 @@ cloudinary.config({
 });
 
 export async function POST(req) {
-  try {
-    const { videoData, title, thumbnailData, previewDuration = 5 } = await req.json();
+  const { title, videoBase64, thumbnailBase64 } = await req.json();
 
-    // Step 1: Upload the video to Cloudinary
-    const uploadResponse = await cloudinary.uploader.upload(videoData, {
+  try {
+    // Upload video
+    const videoResponse = await cloudinary.uploader.upload(videoBase64, {
       resource_type: 'video',
-      folder: 'anime', // Customize as needed
-      public_id: title,            // Use title as the public ID
+      folder: `anime-videos/${title}`,
     });
 
-    // Step 2: Upload custom thumbnail, if provided
-    let thumbnailUrl;
-    if (thumbnailData) {
-      const thumbnailResponse = await cloudinary.uploader.upload(thumbnailData, {
-        resource_type: 'image',
-        folder: 'anime',
-        public_id: `${title}_thumbnail`,
-      });
-      thumbnailUrl = thumbnailResponse.secure_url;
-    }
+    // Upload thumbnail with the name "thumbnail.jpg"
+    const thumbnailResponse = await cloudinary.uploader.upload(thumbnailBase64, {
+      folder: `anime-videos/${title}`,
+      public_id: 'thumbnail', // This sets the filename to "thumbnail.jpg"
+    });
 
+    // Response data
     return new Response(
       JSON.stringify({
-        url: uploadResponse.secure_url,
-        public_id: uploadResponse.public_id,
-        thumbnailUrl,
-        previewUrl: `${uploadResponse.secure_url}#t=0,${previewDuration}`,
+        title,
+        videoUrl: videoResponse.secure_url,
+        thumbnailUrl: thumbnailResponse.secure_url,
+        videoPublicId: videoResponse.public_id,
       }),
       { status: 200 }
     );
   } catch (error) {
-    console.error('Upload error:', error);
-    return new Response(JSON.stringify({ error: 'Failed to upload video' }), { status: 500 });
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 }
